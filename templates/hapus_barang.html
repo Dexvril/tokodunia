@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hapus Barang</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="p-6 bg-gray-100">
+
+    <h1 class="text-2xl font-bold mb-4">Hapus Barang</h1>
+
+    <p>Apakah Anda yakin ingin menghapus <b>{{ product.name }}</b>?</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded">Hapus</button>
+        <a href="{% url 'katalog' %}" class="text-blue-500 ml-4">Batal</a>
+    </form>
+
+</body>
+</html>
