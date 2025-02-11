@@ -34,16 +34,17 @@ def katalog(request):
     products = Product.objects.all()
     return render(request, 'katalog.html', {'products': products})
 
-# Tambah Barang
 def tambah_barang(request):
     if request.method == "POST":
-        form = ProductForm(request.POST)
+        form = ProductForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('katalog')
+            return redirect("katalog")  # Sesuaikan dengan nama URL katalog
     else:
         form = ProductForm()
-    return render(request, 'templates/tambah_barang.html', {'form': form})
+    return render(request, "tambah_barang.html", {"form": form})
+
+
 
 # Edit Barang
 def edit_barang(request, pk):
@@ -57,10 +58,7 @@ def edit_barang(request, pk):
         form = ProductForm(instance=product)
     return render(request, 'templates/edit_barang.html', {'form': form, 'product': product})
 
-# Hapus Barang
-def hapus_barang(request, pk):
-    product = get_object_or_404(Product, pk=pk)
-    if request.method == "POST":
-        product.delete()
-        return redirect('katalog')
-    return render(request, 'templates/hapus_barang.html', {'product': product})
+def hapus_barang(request, barang_id):
+    barang = get_object_or_404(Product, id=barang_id)
+    barang.delete()
+    return redirect('katalog')

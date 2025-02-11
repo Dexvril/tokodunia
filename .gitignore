@@ -7,4 +7,8 @@ wheels/
 *.egg-info
 
 # Virtual environments
+db.sqlite3
 .venv
+media
+node_modules
+staticfiles
