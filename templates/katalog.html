@@ -1,46 +1,51 @@
+{% extends "base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Katalog Produk</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100 p-6">
-    <div class="container mx-auto">
-        <h1 class="text-3xl font-bold text-center mb-6">katalog Produk</h1>
-        <div class="flex justify-between items-center mb-6">
-            <h1 class="text-3xl font-bold text-center">Katalog Produk</h1>
-            <a href="{% url 'tambah_barang' %}" class="btn btn-success">
-                + Tambah Barang
-            </a>
-        </div>
-        
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {% for product in products %}
-    <div class="card bg-white shadow-lg p-4">
-        {% if product.image %}
-            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="w-full">
-        {% endif %}
-        <h2 class="text-xl font-bold mt-2">{{ product.name }}</h2>
-        <p class="text-gray-600">{{ product.description }}</p>
-        <p class="text-lg font-semibold mt-2">Rp {{ product.price }}</p>
 
-        <!-- Tombol Hapus -->
-        <a href="{% url 'hapus_barang' product.id %}" 
-           class="btn btn-error mt-2" 
-           onclick="return confirm('Yakin ingin menghapus {{ product.name }}?');">
-           Hapus
+{% block title %}Katalog Produk{% endblock %}
+
+{% block content %}
+<div class="container mx-auto p-6">
+    <h1 class="text-4xl font-bold text-center mb-8 text-primary">Katalog Produk</h1>
+    
+    <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-semibold">Daftar Produk</h2>
+        <a href="{% url 'tambah_barang' %}" class="btn btn-primary">
+            + Tambah Barang
         </a>
     </div>
-{% endfor %}
-
+    
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for product in products %}
+        <div class="card bg-base-100 shadow-lg p-4 border border-gray-200">
+            {% if product.image %}
+                <figure class="w-full h-48 overflow-hidden">
+                    <img src="http://localhost:9001/dalang-assets/{{ product.image }}" 
+                         class="w-full h-full object-cover rounded-lg" 
+                         alt="{{ product.name }}">
+                </figure>
+            {% endif %}
+            <div class="card-body">
+                <h2 class="card-title text-xl font-bold">{{ product.name }}</h2>
+                <p class="text-gray-600">{{ product.description }}</p>
+                <p class="text-lg font-semibold text-primary">Rp {{ product.price }}</p>
+                
+                <div class="card-actions justify-end">
+                    <!-- Tombol Hapus -->
+                    <a href="{% url 'hapus_barang' product.id %}" 
+                       class="btn btn-error btn-sm" 
+                       onclick="return confirm('Yakin ingin menghapus {{ product.name }}?');">
+                        Hapus
+                    </a>
+                </div>
+            </div>
         </div>
-
-        <div class="mt-6">
-            <a href="/" class="btn btn-primary">Main Page</a>
-        </div>
+        {% empty %}
+            <p class="text-center text-gray-500 col-span-3">Tidak ada produk tersedia.</p>
+        {% endfor %}
     </div>
 
-</body>
+    <div class="mt-8 text-center">
+        <a href="/" class="btn btn-secondary">Main Page</a>
+    </div>
+</div>
+{% endblock %}

@@ -10,7 +10,7 @@
 
     <p>Apakah Anda yakin ingin menghapus <b>{{ product.name }}</b>?</p>
 
-    <form method="post">
+    <form method="post"> 
         {% csrf_token %}
         <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded">Hapus</button>
         <a href="{% url 'katalog' %}" class="text-blue-500 ml-4">Batal</a>

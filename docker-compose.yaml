@@ -1,10 +1,10 @@
 services:
-  belanja-app:
-    container_name: belanja-app
-    image: efran-kun:latest
+  dunia-app:
+    container_name: dunia-app
+    image: tpng:latest
     environment:
-      SECRET_KEY: ngawi junior 
-    DB_NAME: belanja
+      SECRET_KEY: huhuhaha 
+      DB_NAME: dunia
       DB_HOST: local-dev-postgresql-1
       DB_PORT: 5432
       DB_USER: dalang
